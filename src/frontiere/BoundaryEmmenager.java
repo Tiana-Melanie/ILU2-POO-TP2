@@ -29,10 +29,8 @@ public class BoundaryEmmenager {
 
 				case 2:
 					System.out.println("Bienvenue villageois " + nomVisiteur);
-					StringBuilder force = new StringBuilder();
-					force.append("Quelle est votre force ?\n");
-					int forceG = Clavier.entrerEntier(force.toString());
-					controlEmmenager.ajouterGaulois(nomVisiteur, forceG);
+					int forceGaulois = Clavier.entrerEntier("Quelle est votre force ?\n");
+					controlEmmenager.ajouterGaulois(nomVisiteur, forceGaulois);
 					break;
 
 				default:
@@ -46,21 +44,17 @@ public class BoundaryEmmenager {
 
 	private void emmenagerDruide(String nomVisiteur) {
 		System.out.println("Bienvenue Druide " + nomVisiteur);
-		StringBuilder force = new StringBuilder();
-		force.append("Quelle est votre force ?");
-		int forceDruide = Clavier.entrerEntier(force.toString());
+		int forceDruide = Clavier.entrerEntier("Quelle est votre force ?");
+		int forcePotionFaible;
+		int forcePotionForte;
 		
-		StringBuilder PotionFaible = new StringBuilder();
-		PotionFaible.append("Quelle est la force de potion la plus faible que vous produisez ?");
-		int forcePotionFaible = Clavier.entrerEntier(PotionFaible.toString());
-		
-		StringBuilder PotionForte = new StringBuilder();
-		PotionForte.append("Quelle est la force de potion la plus forte que vous produisez ?");
-		int forcePotionForte = Clavier.entrerEntier(PotionForte.toString());
-		
-		if(forcePotionFaible > forcePotionForte) {
-			System.out.println("Attention Druide , vous vous êtes trompé entre le minimum et le maximum ");
-		}
+		do {
+			forcePotionFaible = Clavier.entrerEntier("Quelle est la force de potion la plus faible que vous produisez ?");
+			forcePotionForte = Clavier.entrerEntier("Quelle est la force de potion la plus forte que vous produisez ?");
+			if(forcePotionFaible > forcePotionForte) {
+				System.out.println("Attention Druide , vous vous êtes trompé entre le minimum et le maximum ");
+			}
+		}while ((forcePotionFaible > forcePotionForte));
 		controlEmmenager.ajouterDruide(nomVisiteur, forceDruide, forcePotionFaible, forcePotionForte);
 		
 	}
